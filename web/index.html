@@ -690,29 +690,91 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 14px;
       }
-      .suite a {
+      .stool {
+        position: relative;
+        display: flex;
+        flex-direction: column;
         border: 1px solid rgb(var(--text) / 0.08);
-        background: rgb(var(--surface) / 0.6);
-        border-radius: 14px;
-        padding: 16px;
+        background: linear-gradient(
+          180deg,
+          rgb(var(--surface) / 0.92),
+          rgb(var(--surface) / 0.5)
+        );
+        border-radius: 16px;
+        padding: 18px;
+        overflow: hidden;
+        transition: 0.22s;
+      }
+      /* Coloured top accent per tool (--c set inline). */
+      .stool::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--c), transparent);
+        opacity: 0.75;
+      }
+      .stool:hover {
+        transform: translateY(-3px);
+        border-color: color-mix(in srgb, var(--c) 50%, transparent);
+        box-shadow: 0 22px 50px -26px rgba(0, 0, 0, 0.7);
+      }
+      .stool-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .smono {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 15px;
+        color: #fff;
+        background: linear-gradient(
+          135deg,
+          var(--c),
+          color-mix(in srgb, var(--c) 55%, #000)
+        );
+        box-shadow: 0 8px 18px -8px var(--c);
+      }
+      .snm {
+        font-weight: 700;
+        font-size: 14.5px;
+      }
+      .sds {
+        margin-top: 11px;
+        flex: 1;
+        font-size: 12.5px;
+        line-height: 1.5;
+        color: rgb(var(--muted));
+      }
+      .sgo {
+        margin-top: 13px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgb(var(--muted));
         transition: 0.2s;
       }
-      .suite a:hover {
-        border-color: rgb(var(--accent) / 0.45);
-        transform: translateY(-2px);
-      }
-      .suite .nm {
-        font-weight: 700;
-        font-size: 14px;
-      }
-      .suite .ds {
-        font-size: 12px;
-        color: rgb(var(--muted));
-        margin-top: 4px;
+      .stool:hover .sgo {
+        color: var(--c);
+        gap: 8px;
       }
       @media (max-width: 760px) {
         .suite {
           grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 430px) {
+        .suite {
+          grid-template-columns: 1fr;
         }
       }
 
@@ -1022,21 +1084,93 @@
             action. Explore the rest of the suite.
           </p>
           <div class="suite">
-            <a href="https://resolvd.agentpostmortem.workers.dev">
-              <div class="nm">Resolvd</div>
-              <div class="ds">AI support inbox that triages and acts.</div>
+            <a
+              class="stool"
+              style="--c: #f59e0b"
+              href="https://resolvd.agentpostmortem.workers.dev"
+            >
+              <div class="stool-top">
+                <span class="smono">R</span>
+                <span class="snm">Resolvd</span>
+              </div>
+              <p class="sds">AI support inbox that triages and acts.</p>
+              <span class="sgo"
+                >Visit
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 17 17 7M9 7h8v8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
             </a>
-            <a href="https://tracecase.agentpostmortem.workers.dev">
-              <div class="nm">Tracecase</div>
-              <div class="ds">CI for your AI agents.</div>
+            <a
+              class="stool"
+              style="--c: #10b981"
+              href="https://tracecase.agentpostmortem.workers.dev"
+            >
+              <div class="stool-top">
+                <span class="smono">T</span>
+                <span class="snm">Tracecase</span>
+              </div>
+              <p class="sds">CI for your AI agents.</p>
+              <span class="sgo"
+                >Visit
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 17 17 7M9 7h8v8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
             </a>
-            <a href="https://bridgekit.agentpostmortem.workers.dev">
-              <div class="nm">Bridgekit</div>
-              <div class="ds">MCP tools any agent can call.</div>
+            <a
+              class="stool"
+              style="--c: #7c3aed"
+              href="https://bridgekit.agentpostmortem.workers.dev"
+            >
+              <div class="stool-top">
+                <span class="smono">B</span>
+                <span class="snm">Bridgekit</span>
+              </div>
+              <p class="sds">MCP tools any agent can call.</p>
+              <span class="sgo"
+                >Visit
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 17 17 7M9 7h8v8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
             </a>
-            <a href="https://webhands.agentpostmortem.workers.dev">
-              <div class="nm">Webhands</div>
-              <div class="ds">Agents that operate the browser.</div>
+            <a
+              class="stool"
+              style="--c: #06b6d4"
+              href="https://webhands.agentpostmortem.workers.dev"
+            >
+              <div class="stool-top">
+                <span class="smono">W</span>
+                <span class="snm">Webhands</span>
+              </div>
+              <p class="sds">Agents that operate the browser.</p>
+              <span class="sgo"
+                >Visit
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 17 17 7M9 7h8v8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
             </a>
           </div>
         </section>
