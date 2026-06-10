@@ -12,7 +12,9 @@
 // router take over.
 
 export interface Env {
-  ASSETS: Fetcher;
+  ASSETS: {
+    fetch(request: Request): Promise<Response>;
+  };
 }
 
 const SPA_ROOTS = ["/app", "/mobile"];
