@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Greenlite",
+    "slug": "greenlite",
+    "scheme": "greenlite",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a0b"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.royalpinto.greenlite"
+    },
+    "android": {
+      "package": "com.royalpinto.greenlite",
+      "adaptiveIcon": { "backgroundColor": "#0a0a0b" }
+    },
+    "plugins": ["expo-router", "expo-notifications"],
+    "extra": {
+      "supabaseUrl": "",
+      "supabaseAnonKey": "",
+      "resolvdUrl": "",
+      "resolvdToken": ""
+    }
+  }
+}
