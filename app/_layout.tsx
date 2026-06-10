@@ -19,7 +19,7 @@ export default function RootLayout() {
         <Stack.Screen
           name="index"
           options={{
-            title: "greenlite.",
+            title: "Greenlite",
             headerRight: () => (
               <Link href="/chat" asChild>
                 <Pressable

@@ -9,18 +9,34 @@ import {
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { decide, fetchApprovals, type Approval } from "@/lib/api";
+import { askAI } from "@/lib/ai";
 import { C } from "@/lib/theme";
 
 export default function ApprovalDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [item, setItem] = useState<Approval | null>(null);
   const [busy, setBusy] = useState(false);
+  const [aiBusy, setAiBusy] = useState(false);
+  const [advice, setAdvice] = useState<string | null>(null);
 
   useEffect(() => {
     fetchApprovals().then((all) => {
       setItem(all.find((a) => a.id === id) ?? null);
     });
   }, [id]);
+
+  async function askAdvice() {
+    if (!item) return;
+    setAiBusy(true);
+    setAdvice(null);
+    const reply = await askAI(
+      `A support agent escalated this and proposes: "${item.proposedAction}". ` +
+        `Customer message: "${item.detail}". Reason: "${item.reason ?? ""}". ` +
+        `In 2 sentences, should a human approve it? Note any risk.`,
+    );
+    setAdvice(reply);
+    setAiBusy(false);
+  }
 
   async function act(approve: boolean) {
     if (!item) return;
@@ -50,6 +66,39 @@ export default function ApprovalDetail() {
         <Field label="message" value={item.detail} />
         <Field label="proposed action" value={item.proposedAction} highlight />
         {item.reason ? <Field label="why escalated" value={item.reason} /> : null}
+
+        <Pressable
+          onPress={askAdvice}
+          disabled={aiBusy}
+          style={{
+            alignSelf: "flex-start",
+            borderColor: C.accent,
+            borderWidth: 1,
+            borderRadius: 10,
+            paddingHorizontal: 14,
+            paddingVertical: 9,
+            opacity: aiBusy ? 0.6 : 1,
+          }}
+        >
+          <Text style={{ color: C.accent, fontWeight: "600", fontSize: 13 }}>
+            {aiBusy ? "Thinking…" : "✦ Ask AI: should I approve?"}
+          </Text>
+        </Pressable>
+        {advice ? (
+          <View
+            style={{
+              backgroundColor: C.surface,
+              borderColor: C.accent,
+              borderWidth: 1,
+              borderRadius: 12,
+              padding: 12,
+            }}
+          >
+            <Text style={{ color: C.text, fontSize: 14, lineHeight: 20 }}>
+              {advice}
+            </Text>
+          </View>
+        ) : null}
       </ScrollView>
 
       <View
