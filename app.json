@@ -20,7 +20,7 @@
       "adaptiveIcon": { "backgroundColor": "#0a0a0b" }
     },
     "web": { "bundler": "metro", "output": "static" },
-    "experiments": { "baseUrl": "/app" },
+    "experiments": { "baseUrl": "/mobile" },
     "plugins": ["expo-router", "expo-notifications"],
     "extra": {
       "resolvdUrl": "https://resolvd.agentpostmortem.workers.dev",
