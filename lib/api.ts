@@ -27,7 +27,7 @@ export async function fetchApprovals(): Promise<Approval[]> {
   }
 }
 
-// Approve or deny — routes back to the originating agent's approve endpoint.
+// Approve or deny, routes back to the originating agent's approve endpoint.
 export async function decide(
   approval: Approval,
   approve: boolean,

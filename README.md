@@ -11,13 +11,13 @@ proposed action -> approve or deny in one tap.
 
 ## What it does
 
-- **Approvals feed** — pulls pending escalations across your agents (today,
+- **Approvals feed**, pulls pending escalations across your agents (today,
   Resolvd's escalated tickets) with the proposed action and why it escalated.
-- **Review + decide** — tap any item to see the full message and one-tap
+- **Review + decide**, tap any item to see the full message and one-tap
   Approve / Deny, which routes back to the originating agent's approve endpoint.
-- **Push notifications** — `expo-notifications` registration so an agent can
+- **Push notifications**, `expo-notifications` registration so an agent can
   buzz the phone the moment it needs a decision.
-- **Demo mode** — runs with sample approvals when no backend is configured, so
+- **Demo mode**, runs with sample approvals when no backend is configured, so
   the app is explorable immediately.
 
 ## Stack
