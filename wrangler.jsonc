@@ -2,11 +2,14 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "greenlite",
   "account_id": "e271625b8afba8d76b4920ff58e7cebc",
+  "main": "src/index.ts",
   "compatibility_date": "2025-03-25",
-  // Static web build of the Expo app (npm run export:web -> dist).
+  // dist/ holds the marketing site at the root and the Expo web app under
+  // dist/app (see build:web). The Worker in src/index.ts routes between them.
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    "not_found_handling": "none"
   },
   "observability": { "enabled": true }
 }
