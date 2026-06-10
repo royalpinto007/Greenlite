@@ -21,8 +21,8 @@
     },
     "plugins": ["expo-router", "expo-notifications"],
     "extra": {
-      "resolvdUrl": "",
-      "resolvdToken": ""
+      "resolvdUrl": "https://resolvd.agentpostmortem.workers.dev",
+      "resolvdToken": "rv_demo"
     }
   }
 }
