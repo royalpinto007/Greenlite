@@ -4,3 +4,10 @@ dist
 *.tsbuildinfo
 .DS_Store
 expo-env.d.ts
+
+# Secrets / local env: never push.
+.env
+.env.local
+.env*.local
+.dev.vars
+.dev.vars.*
