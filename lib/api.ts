@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import { CONFIG, isConfigured } from "./config";
 
 export interface Approval {
@@ -11,53 +10,42 @@ export interface Approval {
   createdAt: string;
 }
 
-const supabase = isConfigured()
-  ? createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey, {
-      auth: { persistSession: false },
-    })
-  : null;
-
-// Pending approvals = escalated tickets across the agent suite. Today that is
-// Resolvd's escalations (rv_tickets where status=escalated); the same shape
-// extends to other agents as they add escalation rows.
+// Pending approvals = escalations across the agent suite. Greenlite reads them
+// from each agent's own server-side API (never a database directly), so the app
+// carries no DB credentials. Today that source is Resolvd's /api/approvals.
 export async function fetchApprovals(): Promise<Approval[]> {
-  if (!supabase) return SAMPLE;
-  const { data, error } = await supabase
-    .from("rv_tickets")
-    .select("id, subject, body, proposed_action, reason, created_at")
-    .eq("status", "escalated")
-    .order("created_at", { ascending: false })
-    .limit(50);
-  if (error || !data) return [];
-  return data.map((t) => ({
-    id: t.id as string,
-    source: "resolvd",
-    title: (t.subject as string) || "Support ticket",
-    detail: (t.body as string) ?? "",
-    proposedAction: (t.proposed_action as string) ?? "",
-    reason: (t.reason as string) ?? null,
-    createdAt: t.created_at as string,
-  }));
+  if (!isConfigured()) return SAMPLE;
+  try {
+    const res = await fetch(`${CONFIG.resolvdUrl}/api/approvals`, {
+      headers: { "x-resolvd-token": CONFIG.resolvdToken },
+    });
+    if (!res.ok) return [];
+    const json = (await res.json()) as { approvals?: Approval[] };
+    return json.approvals ?? [];
+  } catch {
+    return [];
+  }
 }
 
-// Approve or deny. Routes back to the originating agent's approve endpoint.
+// Approve or deny — routes back to the originating agent's approve endpoint.
 export async function decide(
   approval: Approval,
   approve: boolean,
 ): Promise<boolean> {
-  if (!CONFIG.resolvdUrl || !CONFIG.resolvdToken) {
-    // Demo mode: pretend it succeeded so the UI is explorable without a backend.
-    return true;
+  if (!isConfigured()) return true; // demo mode
+  try {
+    const res = await fetch(`${CONFIG.resolvdUrl}/api/approve`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-resolvd-token": CONFIG.resolvdToken,
+      },
+      body: JSON.stringify({ id: approval.id, approve }),
+    });
+    return res.ok;
+  } catch {
+    return false;
   }
-  const res = await fetch(`${CONFIG.resolvdUrl}/api/approve`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "x-resolvd-token": CONFIG.resolvdToken,
-    },
-    body: JSON.stringify({ id: approval.id, approve }),
-  });
-  return res.ok;
 }
 
 const SAMPLE: Approval[] = [

@@ -21,8 +21,6 @@
     },
     "plugins": ["expo-router", "expo-notifications"],
     "extra": {
-      "supabaseUrl": "",
-      "supabaseAnonKey": "",
       "resolvdUrl": "",
       "resolvdToken": ""
     }
