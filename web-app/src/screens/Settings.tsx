@@ -24,7 +24,10 @@ export function Settings() {
         </Card>
 
         <Card>
-          <CardHeader title="Notifications" hint="When to alert operators" />
+          <CardHeader
+            title="Notifications"
+            hint="Demo preferences for when operators should be alerted"
+          />
           <ToggleRow
             label="Push for new high-risk approvals"
             desc="Notify immediately when a high-risk action is queued."
@@ -125,8 +128,9 @@ export function Settings() {
             <span className="text-txt-dim">gl_live_••••••••••••••••</span>
           </div>
           <p className="mt-2 text-2xs text-txt-faint">
-            Agents POST proposed actions here; approved decisions are sent back
-            to the agent's callback URL.
+            Demo endpoint shown for product context. In production, agents POST
+            proposed actions here and approved decisions are sent back to the
+            agent's callback URL.
           </p>
         </Card>
       </div>

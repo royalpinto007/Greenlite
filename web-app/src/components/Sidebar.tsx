@@ -21,7 +21,11 @@ export function Sidebar() {
 
   return (
     <aside className="sticky top-0 z-30 hidden h-screen w-[68px] shrink-0 flex-col border-r border-ink-700 bg-ink-900/92 backdrop-blur md:flex lg:w-[232px]">
-      <div className="flex h-[60px] items-center gap-2.5 border-b border-ink-700 px-3.5 lg:px-5">
+      <a
+        href="/"
+        className="flex h-[60px] items-center gap-2.5 border-b border-ink-700 px-3.5 transition hover:bg-ink-850 lg:px-5"
+        title="Back to Greenlite home"
+      >
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-[10px] bg-gradient-to-br from-brand to-brand-2 shadow-[0_6px_18px_-6px_rgba(139,92,246,0.7)]">
           <Icon.check size={17} className="text-white" />
         </span>
@@ -31,7 +35,7 @@ export function Sidebar() {
           </div>
           <div className="mt-1 text-2xs text-txt-faint">Control tower</div>
         </div>
-      </div>
+      </a>
 
       <nav className="flex-1 space-y-0.5 overflow-y-auto px-2.5 py-3 lg:px-3">
         {NAV.map((item) => (
