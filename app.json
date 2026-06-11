@@ -23,7 +23,7 @@
     "experiments": { "baseUrl": "/mobile" },
     "plugins": ["expo-router", "expo-notifications"],
     "extra": {
-      "resolvdUrl": "https://resolvd.agentpostmortem.workers.dev",
+      "resolvdUrl": "https://resolvd.agentpostmortem.com",
       "resolvdToken": "rv_demo"
     }
   }

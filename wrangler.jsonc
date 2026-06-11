@@ -1,9 +1,15 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "greenlite",
-  "account_id": "a97af859ae0c177338e4df0b1d640176",
   "main": "src/index.ts",
   "compatibility_date": "2026-06-11",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "greenlite.agentpostmortem.com",
+      "custom_domain": true
+    }
+  ],
   // dist/ holds the marketing site at the root and the Expo web app under
   // dist/app (see build:web). The Worker in src/index.ts routes between them.
   "assets": {
