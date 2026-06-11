@@ -55,6 +55,67 @@ export function Dashboard() {
         }
       />
 
+      <section className="mb-4 grid gap-4 xl:grid-cols-[1.3fr_0.9fr]">
+        <Card className="relative overflow-hidden p-5">
+          <div className="pointer-events-none absolute -right-16 -top-20 h-44 w-44 rounded-full bg-brand/20 blur-3xl" />
+          <div className="relative">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-2xs font-semibold uppercase tracking-[0.16em] text-brand-2">
+              <span className="h-1.5 w-1.5 animate-ping2 rounded-full bg-good" />
+              approval cockpit
+            </div>
+            <h2 className="mt-4 max-w-2xl text-[30px] font-bold leading-tight tracking-[-0.03em] sm:text-[38px]">
+              Keep autonomous work moving without losing control.
+            </h2>
+            <p className="mt-3 max-w-2xl text-[14px] leading-6 text-txt-dim">
+              Greenlite gives operators one place to review risky actions,
+              inspect agent confidence, and approve the next step from desktop
+              or mobile.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <Button variant="primary" onClick={() => nav("/approvals")}>
+                Review {m.pending} pending <Icon.arrow size={15} />
+              </Button>
+              <Button onClick={() => nav("/agents")}>
+                View agent health
+              </Button>
+            </div>
+          </div>
+        </Card>
+
+        <Card className="p-0">
+          <div className="border-b border-ink-700 px-4 py-3">
+            <div className="text-[13px] font-semibold">Live queue pulse</div>
+            <div className="mt-0.5 text-2xs text-txt-faint">
+              Policy gates currently protecting production actions
+            </div>
+          </div>
+          <div className="space-y-3 p-4">
+            {triggers.length === 0 ? (
+              <p className="text-[13px] text-txt-faint">No active triggers.</p>
+            ) : (
+              triggers.map(([name, count]) => (
+                <div key={name}>
+                  <div className="mb-1.5 flex items-center justify-between text-[12px]">
+                    <span className="truncate text-txt-dim">{name}</span>
+                    <span className="font-semibold tabular-nums text-txt">
+                      {count}
+                    </span>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-ink-700">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-brand to-brand-2"
+                      style={{
+                        width: `${Math.max(16, Math.min(100, (count / Math.max(1, m.pending)) * 100))}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </Card>
+      </section>
+
       {/* Compact metric row */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-5">
         <MetricCard label="Pending approvals" value={m.pending} tone="warn" />
