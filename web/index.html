@@ -812,6 +812,31 @@
         font-size: 13px;
         color: rgb(var(--muted));
       }
+      .foot-brand {
+        display: block;
+        margin-bottom: 4px;
+        color: rgb(var(--text));
+        font-weight: 700;
+      }
+      .foot-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .foot-links a {
+        border: 1px solid rgb(var(--text) / 0.09);
+        border-radius: 999px;
+        padding: 8px 11px;
+        background: rgb(var(--surface) / 0.45);
+        color: rgb(var(--muted));
+        font-size: 12px;
+        font-weight: 600;
+        transition: 0.18s;
+      }
+      .foot-links a:hover {
+        border-color: rgb(var(--accent) / 0.45);
+        color: rgb(var(--text));
+      }
 
       @media (prefers-reduced-motion: reduce) {
         * {
@@ -1111,7 +1136,7 @@
               href="https://resolvd.agentpostmortem.com"
             >
               <div class="stool-top">
-                <span class="smono"><img src="https://resolvd.agentpostmortem.com/icon.svg" alt="" /></span>
+                <span class="smono">R</span>
                 <span class="snm">Resolvd</span>
               </div>
               <p class="sds">AI support inbox that triages and acts.</p>
@@ -1133,7 +1158,7 @@
               href="https://tracecase.agentpostmortem.com"
             >
               <div class="stool-top">
-                <span class="smono"><img src="https://tracecase.agentpostmortem.com/icon.svg" alt="" /></span>
+                <span class="smono">T</span>
                 <span class="snm">Tracecase</span>
               </div>
               <p class="sds">CI for your AI agents.</p>
@@ -1155,7 +1180,7 @@
               href="https://bridgekit.agentpostmortem.com"
             >
               <div class="stool-top">
-                <span class="smono"><img src="https://bridgekit.agentpostmortem.com/icon.svg" alt="" /></span>
+                <span class="smono">B</span>
                 <span class="snm">Bridgekit</span>
               </div>
               <p class="sds">MCP tools any agent can call.</p>
@@ -1177,7 +1202,7 @@
               href="https://webhands.agentpostmortem.com"
             >
               <div class="stool-top">
-                <span class="smono"><img src="https://webhands.agentpostmortem.com/icon.svg" alt="" /></span>
+                <span class="smono">W</span>
                 <span class="snm">Webhands</span>
               </div>
               <p class="sds">Agents that operate the browser.</p>
@@ -1199,7 +1224,7 @@
               href="https://agentpostmortem.com"
             >
               <div class="stool-top">
-                <span class="smono"><img src="https://agentpostmortem.com/icon" alt="" /></span>
+                <span class="smono">A</span>
                 <span class="snm">AgentPostmortem</span>
               </div>
               <p class="sds">Real AI agent failures, evidence, and lessons.</p>
@@ -1221,8 +1246,15 @@
 
       <footer>
         <div class="wrap foot">
-          <span>Greenlite &middot; approve your agents from anywhere.</span>
-          <a href="/app">Open the web console &rarr;</a>
+          <div>
+            <span class="foot-brand">Greenlite</span>
+            <span>Approve your agents from anywhere.</span>
+          </div>
+          <div class="foot-links">
+            <a href="/app">Console</a>
+            <a href="/mobile">Mobile</a>
+            <a href="https://agentpostmortem.com">AgentPostmortem</a>
+          </div>
         </div>
       </footer>
     </div>
