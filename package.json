@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "export:web": "env -u FORCE_COLOR expo export -p web --output-dir dist/mobile",
+    "export:web": "env -u FORCE_COLOR -u NO_COLOR expo export -p web --output-dir dist/mobile",
     "build:console": "cd web-app && npm install && npm run build",
     "build:web": "rm -rf dist && npm run export:web && npm run build:console && cp -r web/. dist/",
     "deploy": "npm run build:web && wrangler deploy",

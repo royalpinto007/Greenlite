@@ -674,20 +674,37 @@
         max-width: 38em;
         font-size: 15px;
       }
+      .band-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
       .store {
         display: inline-flex;
         gap: 8px;
         align-items: center;
-        font-size: 13px;
-        color: rgb(var(--muted));
-        margin-top: 16px;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid rgb(var(--text) / 0.14);
+        border-radius: 11px;
+        background: rgb(var(--surface) / 0.75);
+        padding: 10px 18px;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgb(var(--text));
+        transition: 0.2s;
+      }
+      .store:hover {
+        border-color: rgb(var(--accent) / 0.55);
+        transform: translateY(-1px);
       }
 
       /* ---- Suite ---- */
       .suite {
         margin-top: 30px;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
         gap: 14px;
       }
       .stool {
@@ -741,6 +758,13 @@
           color-mix(in srgb, var(--c) 55%, #000)
         );
         box-shadow: 0 8px 18px -8px var(--c);
+        overflow: hidden;
+      }
+      .smono img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
       }
       .snm {
         font-weight: 700;
@@ -766,11 +790,6 @@
       .stool:hover .sgo {
         color: var(--c);
         gap: 8px;
-      }
-      @media (max-width: 760px) {
-        .suite {
-          grid-template-columns: 1fr 1fr;
-        }
       }
       @media (max-width: 430px) {
         .suite {
@@ -1051,26 +1070,28 @@
               mobile app is the fast approve-on-the-go cockpit, native on iOS and
               Android from the same Expo codebase.
             </p>
-            <a href="/app" class="btn btn-primary">Open the web console &rarr;</a>
-            <div class="store">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                <rect
-                  x="6"
-                  y="2"
-                  width="12"
-                  height="20"
-                  rx="2.5"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                />
-                <path
-                  d="M11 18h2"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-              </svg>
-              <a href="/mobile">Preview the mobile app &rarr;</a>
+            <div class="band-actions">
+              <a href="/app" class="btn btn-primary">Open the web console &rarr;</a>
+              <a href="/mobile" class="store">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="6"
+                    y="2"
+                    width="12"
+                    height="20"
+                    rx="2.5"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                  <path
+                    d="M11 18h2"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Preview the mobile app &rarr;
+              </a>
             </div>
           </div>
         </section>
@@ -1087,10 +1108,10 @@
             <a
               class="stool"
               style="--c: #f59e0b"
-              href="https://resolvd.agentpostmortem.workers.dev"
+              href="https://resolvd.aashinyraa.workers.dev"
             >
               <div class="stool-top">
-                <span class="smono">R</span>
+                <span class="smono"><img src="https://resolvd.aashinyraa.workers.dev/icon.svg" alt="" /></span>
                 <span class="snm">Resolvd</span>
               </div>
               <p class="sds">AI support inbox that triages and acts.</p>
@@ -1109,10 +1130,10 @@
             <a
               class="stool"
               style="--c: #10b981"
-              href="https://tracecase.agentpostmortem.workers.dev"
+              href="https://tracecase.aashinyraa.workers.dev"
             >
               <div class="stool-top">
-                <span class="smono">T</span>
+                <span class="smono"><img src="https://tracecase.aashinyraa.workers.dev/icon.svg" alt="" /></span>
                 <span class="snm">Tracecase</span>
               </div>
               <p class="sds">CI for your AI agents.</p>
@@ -1131,10 +1152,10 @@
             <a
               class="stool"
               style="--c: #7c3aed"
-              href="https://bridgekit.agentpostmortem.workers.dev"
+              href="https://bridgekit.aashinyraa.workers.dev"
             >
               <div class="stool-top">
-                <span class="smono">B</span>
+                <span class="smono"><img src="https://bridgekit.aashinyraa.workers.dev/icon.svg" alt="" /></span>
                 <span class="snm">Bridgekit</span>
               </div>
               <p class="sds">MCP tools any agent can call.</p>
@@ -1153,13 +1174,35 @@
             <a
               class="stool"
               style="--c: #06b6d4"
-              href="https://webhands.agentpostmortem.workers.dev"
+              href="https://webhands.aashinyraa.workers.dev"
             >
               <div class="stool-top">
-                <span class="smono">W</span>
+                <span class="smono"><img src="https://webhands.aashinyraa.workers.dev/icon.svg" alt="" /></span>
                 <span class="snm">Webhands</span>
               </div>
               <p class="sds">Agents that operate the browser.</p>
+              <span class="sgo"
+                >Visit
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M7 17 17 7M9 7h8v8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
+            </a>
+            <a
+              class="stool"
+              style="--c: #ef4444"
+              href="https://agentpostmortem.com"
+            >
+              <div class="stool-top">
+                <span class="smono"><img src="https://agentpostmortem.com/icon" alt="" /></span>
+                <span class="snm">AgentPostmortem</span>
+              </div>
+              <p class="sds">Real AI agent failures, evidence, and lessons.</p>
               <span class="sgo"
                 >Visit
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none">

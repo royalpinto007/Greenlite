@@ -59,10 +59,31 @@ export default function ApprovalDetail() {
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ padding: 16, gap: 14 }}>
+    <View style={{ flex: 1, backgroundColor: C.bg }}>
+      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 28, gap: 12 }}>
+        <View
+          style={{
+            borderRadius: 20,
+            borderWidth: 1,
+            borderColor: "#4C3D1F",
+            backgroundColor: "#1C1810",
+            padding: 17,
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+            <Text style={{ color: C.warn, fontSize: 10, fontWeight: "900", letterSpacing: 0.9 }}>
+              HUMAN DECISION REQUIRED
+            </Text>
+            <Text style={{ color: C.faint, fontSize: 10, textTransform: "uppercase" }}>{item.source}</Text>
+          </View>
+          <Text style={{ color: C.text, fontSize: 23, lineHeight: 29, fontWeight: "900", marginTop: 12 }}>
+            {item.title}
+          </Text>
+          <Text style={{ color: C.muted, fontSize: 12, lineHeight: 18, marginTop: 7 }}>
+            Review the proposed action and policy reason before allowing the agent to continue.
+          </Text>
+        </View>
         <Field label="from agent" value={item.source} />
-        <Field label="request" value={item.title} />
         <Field label="message" value={item.detail} />
         <Field label="proposed action" value={item.proposedAction} highlight />
         {item.reason ? <Field label="why escalated" value={item.reason} /> : null}
@@ -71,32 +92,40 @@ export default function ApprovalDetail() {
           onPress={askAdvice}
           disabled={aiBusy}
           style={{
-            alignSelf: "flex-start",
-            borderColor: C.accent,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 8,
+            borderColor: "#31486A",
             borderWidth: 1,
-            borderRadius: 10,
+            backgroundColor: "#111B2B",
+            borderRadius: 15,
             paddingHorizontal: 14,
-            paddingVertical: 9,
+            paddingVertical: 13,
             opacity: aiBusy ? 0.6 : 1,
           }}
         >
-          <Text style={{ color: C.accent, fontWeight: "600", fontSize: 13 }}>
-            {aiBusy ? "Thinking…" : "✦ Ask AI: should I approve?"}
+          <Text style={{ color: C.accent2, fontWeight: "900", fontSize: 16 }}>✦</Text>
+          <Text style={{ color: C.accent, fontWeight: "800", fontSize: 13 }}>
+            {aiBusy ? "Reviewing risk..." : "Ask AI for a second opinion"}
           </Text>
         </Pressable>
         {advice ? (
           <View
             style={{
-              backgroundColor: C.surface,
-              borderColor: C.accent,
+              backgroundColor: C.surface2,
+              borderColor: "#31486A",
               borderWidth: 1,
-              borderRadius: 12,
-              padding: 12,
+              borderRadius: 16,
+              padding: 14,
             }}
           >
-            <Text style={{ color: C.text, fontSize: 14, lineHeight: 20 }}>
-              {advice}
-            </Text>
+              <Text style={{ color: C.accent2, fontSize: 10, fontWeight: "900", letterSpacing: 0.8, marginBottom: 7 }}>
+                AI RISK REVIEW
+              </Text>
+              <Text style={{ color: C.text, fontSize: 14, lineHeight: 21 }}>
+                {advice}
+              </Text>
           </View>
         ) : null}
       </ScrollView>
@@ -106,14 +135,17 @@ export default function ApprovalDetail() {
           flexDirection: "row",
           gap: 12,
           padding: 16,
+          paddingBottom: 20,
           borderTopColor: C.border,
           borderTopWidth: 1,
+          backgroundColor: C.bg,
         }}
       >
-        <Button label="Deny" tone={C.bad} disabled={busy} onPress={() => act(false)} />
+        <Button label="Deny" tone={C.surface2} textTone={C.bad} disabled={busy} onPress={() => act(false)} />
         <Button
           label="Approve"
           tone={C.good}
+          textTone={C.bg}
           disabled={busy}
           onPress={() => act(true)}
         />
@@ -134,17 +166,18 @@ function Field({
   return (
     <View
       style={{
-        backgroundColor: C.surface,
+        backgroundColor: highlight ? "#1C1810" : C.surface,
         borderColor: highlight ? C.warn : C.border,
         borderWidth: 1,
-        borderRadius: 10,
-        padding: 12,
+        borderRadius: 15,
+        padding: 14,
       }}
     >
       <Text
         style={{
           color: C.muted,
           fontSize: 10,
+          fontWeight: "800",
           textTransform: "uppercase",
           letterSpacing: 1,
           marginBottom: 4,
@@ -152,7 +185,7 @@ function Field({
       >
         {label}
       </Text>
-      <Text style={{ color: highlight ? C.warn : C.text, fontSize: 14 }}>
+      <Text style={{ color: highlight ? C.warn : C.text, fontSize: 14, lineHeight: 21 }}>
         {value}
       </Text>
     </View>
@@ -162,11 +195,13 @@ function Field({
 function Button({
   label,
   tone,
+  textTone,
   onPress,
   disabled,
 }: {
   label: string;
   tone: string;
+  textTone: string;
   onPress: () => void;
   disabled: boolean;
 }) {
@@ -178,12 +213,12 @@ function Button({
         flex: 1,
         backgroundColor: tone,
         opacity: disabled ? 0.5 : 1,
-        borderRadius: 10,
-        paddingVertical: 14,
+        borderRadius: 15,
+        paddingVertical: 15,
         alignItems: "center",
       }}
     >
-      <Text style={{ color: "#0a0a0b", fontWeight: "700" }}>{label}</Text>
+      <Text style={{ color: textTone, fontWeight: "900" }}>{label}</Text>
     </Pressable>
   );
 }

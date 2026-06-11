@@ -1,6 +1,6 @@
 import { Link, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Pressable, Text } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { C } from "@/lib/theme";
 
@@ -11,7 +11,8 @@ export default function RootLayout() {
       <Stack
         screenOptions={{
           headerStyle: { backgroundColor: C.bg },
-          headerTitleStyle: { color: C.text, fontWeight: "600" },
+          headerShadowVisible: false,
+          headerTitleStyle: { color: C.text, fontWeight: "700" },
           headerTintColor: C.accent,
           contentStyle: { backgroundColor: C.bg },
         }}
@@ -19,20 +20,46 @@ export default function RootLayout() {
         <Stack.Screen
           name="index"
           options={{
-            title: "Greenlite",
+            headerTitle: () => (
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 9 }}>
+                <View
+                  style={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: 10,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: C.accent,
+                  }}
+                >
+                  <Text style={{ color: C.bg, fontWeight: "900", fontSize: 17 }}>✓</Text>
+                </View>
+                <View>
+                  <Text style={{ color: C.text, fontWeight: "800", fontSize: 16 }}>
+                    Greenlite
+                  </Text>
+                  <Text style={{ color: C.faint, fontSize: 10, marginTop: -1 }}>
+                    Approval cockpit
+                  </Text>
+                </View>
+              </View>
+            ),
             headerRight: () => (
               <Link href="/chat" asChild>
                 <Pressable
+                  accessibilityLabel="Open AI assistant"
                   style={{
-                    backgroundColor: C.accent,
-                    borderRadius: 8,
-                    paddingHorizontal: 12,
-                    paddingVertical: 6,
+                    width: 38,
+                    height: 38,
+                    borderRadius: 13,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: C.surface2,
+                    borderColor: C.border,
+                    borderWidth: 1,
                   }}
                 >
-                  <Text style={{ color: "#0c0a10", fontWeight: "700", fontSize: 13 }}>
-                    Ask AI
-                  </Text>
+                  <Text style={{ color: C.accent2, fontWeight: "800", fontSize: 18 }}>✦</Text>
                 </Pressable>
               </Link>
             ),

@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   FlatList,
   Pressable,
+  ScrollView,
   Text,
   TextInput,
   View,
@@ -11,6 +12,11 @@ import { askAI } from "@/lib/ai";
 import { C } from "@/lib/theme";
 
 type Msg = { role: "user" | "assistant"; content: string };
+const SUGGESTIONS = [
+  "What needs attention?",
+  "Explain the refund risk",
+  "Which action is safest?",
+];
 
 export default function Chat() {
   const [msgs, setMsgs] = useState<Msg[]>([
@@ -42,25 +48,64 @@ export default function Chat() {
         ref={listRef}
         data={msgs}
         keyExtractor={(_, i) => String(i)}
-        contentContainerStyle={{ padding: 16, gap: 10 }}
+        contentContainerStyle={{ padding: 16, paddingBottom: 24, gap: 10 }}
+        ListHeaderComponent={
+          <View
+            style={{
+              borderRadius: 18,
+              borderWidth: 1,
+              borderColor: C.border,
+              backgroundColor: C.surface,
+              padding: 16,
+              marginBottom: 10,
+            }}
+          >
+            <Text style={{ color: C.accent2, fontSize: 11, fontWeight: "900", letterSpacing: 0.8 }}>
+              DECISION COPILOT
+            </Text>
+            <Text style={{ color: C.text, fontSize: 20, lineHeight: 25, fontWeight: "900", marginTop: 9 }}>
+              Get a second opinion before an agent acts.
+            </Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 14 }}>
+              <View style={{ flexDirection: "row", gap: 8 }}>
+                {SUGGESTIONS.map((suggestion) => (
+                  <Pressable
+                    key={suggestion}
+                    onPress={() => setInput(suggestion)}
+                    style={{
+                      borderRadius: 999,
+                      borderWidth: 1,
+                      borderColor: C.border,
+                      backgroundColor: C.surface2,
+                      paddingHorizontal: 11,
+                      paddingVertical: 7,
+                    }}
+                  >
+                    <Text style={{ color: C.muted, fontSize: 11 }}>{suggestion}</Text>
+                  </Pressable>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
+        }
         renderItem={({ item }) => (
           <View
             style={{
               alignSelf: item.role === "user" ? "flex-end" : "flex-start",
               maxWidth: "85%",
-              backgroundColor: item.role === "user" ? C.accent : C.surface,
+              backgroundColor: item.role === "user" ? C.accent : C.surface2,
               borderColor: C.border,
               borderWidth: item.role === "user" ? 0 : 1,
-              borderRadius: 16,
-              paddingHorizontal: 12,
-              paddingVertical: 9,
+              borderRadius: 18,
+              paddingHorizontal: 13,
+              paddingVertical: 10,
             }}
           >
             <Text
               style={{
-                color: item.role === "user" ? "#0c0a10" : C.text,
+                color: item.role === "user" ? C.bg : C.text,
                 fontSize: 14,
-                lineHeight: 20,
+                lineHeight: 21,
               }}
             >
               {item.content}
@@ -81,8 +126,10 @@ export default function Chat() {
           flexDirection: "row",
           gap: 8,
           padding: 12,
+          paddingBottom: 16,
           borderTopColor: C.border,
           borderTopWidth: 1,
+          backgroundColor: C.bg,
         }}
       >
         <TextInput
@@ -93,13 +140,13 @@ export default function Chat() {
           onSubmitEditing={send}
           style={{
             flex: 1,
-            backgroundColor: C.surface,
+            backgroundColor: C.surface2,
             borderColor: C.border,
             borderWidth: 1,
-            borderRadius: 10,
+            borderRadius: 15,
             color: C.text,
-            paddingHorizontal: 12,
-            paddingVertical: 10,
+            paddingHorizontal: 14,
+            paddingVertical: 12,
           }}
         />
         <Pressable
@@ -107,13 +154,14 @@ export default function Chat() {
           disabled={busy}
           style={{
             backgroundColor: C.accent,
-            borderRadius: 10,
-            paddingHorizontal: 16,
+            width: 48,
+            borderRadius: 15,
             justifyContent: "center",
+            alignItems: "center",
             opacity: busy ? 0.5 : 1,
           }}
         >
-          <Text style={{ color: "#0c0a10", fontWeight: "700" }}>Send</Text>
+          <Text style={{ color: C.bg, fontWeight: "900", fontSize: 19 }}>↑</Text>
         </Pressable>
       </View>
     </View>
