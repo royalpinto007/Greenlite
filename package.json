@@ -9,29 +9,32 @@
     "web": "expo start --web",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "export:web": "expo export -p web --output-dir dist/mobile",
+    "export:web": "env -u FORCE_COLOR expo export -p web --output-dir dist/mobile",
     "build:console": "cd web-app && npm install && npm run build",
     "build:web": "rm -rf dist && npm run export:web && npm run build:console && cp -r web/. dist/",
     "deploy": "npm run build:web && wrangler deploy",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@expo/metro-runtime": "~3.2.3",
-    "expo": "~51.0.0",
-    "expo-constants": "~16.0.0",
-    "expo-linking": "~6.3.0",
-    "expo-notifications": "~0.28.0",
-    "expo-router": "~3.5.0",
-    "expo-status-bar": "~1.12.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native": "0.74.5",
-    "react-native-safe-area-context": "4.10.5",
-    "react-native-screens": "3.31.1",
-    "react-native-web": "~0.19.10"
+    "@expo/metro-runtime": "^56.0.15",
+    "expo": "^56.0.11",
+    "expo-constants": "~56.0.18",
+    "expo-linking": "^56.0.14",
+    "expo-notifications": "^56.0.17",
+    "expo-router": "^56.2.10",
+    "expo-status-bar": "^56.0.4",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-native": "^0.85.3",
+    "react-native-safe-area-context": "^5.8.0",
+    "react-native-screens": "^4.25.2",
+    "react-native-web": "^0.21.2"
   },
   "devDependencies": {
-    "@types/react": "~18.2.45",
-    "typescript": "~5.5.3"
+    "@types/react": "^19.2.17",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "uuid": "11.1.1"
   }
 }
