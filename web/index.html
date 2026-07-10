@@ -8,45 +8,42 @@
       name="description"
       content="Greenlite is the mobile cockpit for your AI agents. Review escalations, ask AI for a second opinion, and approve, edit or deny actions in one tap. iOS, Android and web."
     />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23081108'/%3E%3Cpath d='M8 16.5l5.5 5.5L24 10.5' fill='none' stroke='%237cc253' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+      type="image/svg+xml"
     />
     <style>
       :root {
-        --bg: 13 12 10;
-        --surface: 18 17 16;
-        --surface-2: 26 24 21;
-        --border: 57 54 48;
-        --border-soft: 41 39 35;
-        --muted: 152 146 138;
-        --text: 239 236 229;
-        --accent: 201 163 92;
-        --accent-2: 226 194 136;
+        --bg: 8 12 8;
+        --surface: 14 19 14;
+        --surface-2: 21 28 20;
+        --border: 50 60 48;
+        --border-soft: 36 45 35;
+        --muted: 156 168 152;
+        --text: 233 240 230;
+        --accent: 124 194 83;
+        --accent-2: 158 216 122;
         --good: 87 197 132;
         --bad: 226 113 106;
-        --glow-1: 201 163 92;
-        --glow-2: 201 163 92;
-        --serif: "Instrument Serif", Georgia, serif;
+        --glow-1: 124 194 83;
+        --glow-2: 87 197 132;
         color-scheme: dark;
       }
       [data-theme="light"] {
-        --bg: 250 248 244;
+        --bg: 246 250 244;
         --surface: 255 255 255;
-        --surface-2: 246 243 237;
-        --border: 228 223 214;
-        --border-soft: 236 232 224;
-        --muted: 110 105 98;
-        --text: 32 28 22;
-        --accent: 158 118 48;
-        --accent-2: 138 100 38;
-        --good: 22 150 88;
-        --bad: 191 62 55;
-        --glow-1: 213 183 128;
-        --glow-2: 213 183 128;
+        --surface-2: 237 245 233;
+        --border: 217 228 212;
+        --border-soft: 227 236 222;
+        --muted: 89 102 85;
+        --text: 22 31 20;
+        --accent: 45 118 44;
+        --accent-2: 35 96 36;
+        --good: 24 128 74;
+        --bad: 184 54 47;
+        --glow-1: 150 205 128;
+        --glow-2: 150 205 128;
         color-scheme: light;
       }
 
@@ -60,10 +57,11 @@
       }
       body {
         font-family:
-          "Inter",
+          ui-sans-serif,
+          system-ui,
           -apple-system,
-          BlinkMacSystemFont,
           "Segoe UI",
+          Roboto,
           sans-serif;
         background: rgb(var(--bg));
         color: rgb(var(--text));
@@ -223,6 +221,15 @@
           display: none;
         }
       }
+      @media (max-width: 480px) {
+        .nav .signin-label {
+          display: none;
+        }
+        .nav .btn {
+          padding: 9px 14px;
+          font-size: 13px;
+        }
+      }
 
       /* ---- Hero ---- */
       .hero {
@@ -273,11 +280,9 @@
         font-weight: 800;
       }
       .grad {
-        font-family: var(--serif);
-        font-style: italic;
-        font-weight: 400;
-        letter-spacing: -0.01em;
-        color: rgb(var(--accent-2));
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: rgb(var(--accent));
       }
       .lede {
         margin-top: 18px;
@@ -381,7 +386,7 @@
         justify-content: space-between;
         margin-bottom: 14px;
       }
-      .screen-head h3 {
+      .screen-head strong {
         font-size: 16px;
         font-weight: 700;
       }
@@ -618,7 +623,7 @@
         border: 1px solid rgb(var(--accent) / 0.4);
         color: rgb(var(--accent-2));
       }
-      .step h4 {
+      .step h3 {
         font-size: 14.5px;
         font-weight: 700;
       }
@@ -863,7 +868,9 @@
               id="theme"
               aria-label="Toggle theme"
             ></button>
-            <a href="/app" class="btn btn-primary">Open console (sign in)</a>
+            <a href="/app" class="btn btn-primary"
+              >Open console<span class="signin-label"> (sign in)</span></a
+            >
           </div>
         </div>
       </header>
@@ -914,7 +921,7 @@
               <div class="notch"></div>
               <div class="screen">
                 <div class="screen-head">
-                  <h3>Approvals</h3>
+                  <strong>Approvals</strong>
                   <span>2 pending</span>
                 </div>
 
@@ -1054,22 +1061,22 @@
             <div class="flow-line"></div>
             <div class="step">
               <div class="num">1</div>
-              <h4>Agent escalates</h4>
+              <h3>Agent escalates</h3>
               <p>Resolvd hits a risky case and proposes an action.</p>
             </div>
             <div class="step">
               <div class="num">2</div>
-              <h4>You're notified</h4>
+              <h3>You're notified</h3>
               <p>It lands in Greenlite with context and priority attached.</p>
             </div>
             <div class="step">
               <div class="num">3</div>
-              <h4>Review + ask AI</h4>
+              <h3>Review + ask AI</h3>
               <p>See the context, get a second opinion if you want one.</p>
             </div>
             <div class="step">
               <div class="num">4</div>
-              <h4>Tap to decide</h4>
+              <h3>Tap to decide</h3>
               <p>Approve, edit or deny, and the action runs.</p>
             </div>
           </div>
@@ -1124,7 +1131,7 @@
           <div class="suite">
             <a
               class="stool"
-              style="--c: #c9a35c"
+              style="--c: #e2716a"
               href="https://resolvd.agentpostmortem.com"
             >
               <div class="stool-top">
@@ -1146,7 +1153,7 @@
             </a>
             <a
               class="stool"
-              style="--c: #c9a35c"
+              style="--c: #e0aa3e"
               href="https://tracecase.agentpostmortem.com"
             >
               <div class="stool-top">
@@ -1168,7 +1175,7 @@
             </a>
             <a
               class="stool"
-              style="--c: #c9a35c"
+              style="--c: #a78bfa"
               href="https://bridgekit.agentpostmortem.com"
             >
               <div class="stool-top">
@@ -1190,7 +1197,7 @@
             </a>
             <a
               class="stool"
-              style="--c: #c9a35c"
+              style="--c: #58a6ff"
               href="https://webhands.agentpostmortem.com"
             >
               <div class="stool-top">
