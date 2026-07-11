@@ -1,5 +1,5 @@
 // Greenlite has no server of its own, so it calls Resolvd's CORS-enabled
-// /api/ai, which proxies to the shared Ollama gateway.
+// /api/ai, which calls Groq directly.
 const AI_URL = "https://resolvd.agentpostmortem.com/api/ai";
 
 function cleanReply(reply?: string): string {
