@@ -3,6 +3,12 @@
 The mobile command + approval cockpit for your AI agents. Android + iOS, one
 Expo / React Native codebase.
 
+## Demo
+
+[![Greenlite demo](assets/demo-thumb.png)](assets/demo.mp4)
+
+▶ [Watch the demo](assets/demo.mp4) · Live: https://greenlite.agentpostmortem.com
+
 Every other tool in the suite (Resolvd, Webhands, Pacewatch-style agents) takes
 real actions, but the risky ones need a human to greenlight them, and you're
 rarely at a desk. Greenlite is that human-in-the-loop layer in your pocket: an
