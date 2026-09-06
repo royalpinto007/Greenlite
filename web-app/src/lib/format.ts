@@ -1,6 +1,7 @@
 // Small formatting helpers shared across screens.
 
 export function relTime(ms: number): string {
+  if (!Number.isFinite(ms)) return "just now";
   const diff = Date.now() - ms;
   const m = Math.round(diff / 60000);
   if (m < 1) return "just now";
@@ -17,6 +18,7 @@ export function clockTime(ms: number): string {
 
 export function money(n?: number): string {
   if (n == null) return "—";
+  if (!Number.isFinite(n)) return "-";
   return n.toLocaleString("en-US", {
     style: "currency",
     currency: "USD",
