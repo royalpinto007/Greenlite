@@ -10,11 +10,16 @@ function cleanReply(reply?: string): string {
 }
 
 export async function askAI(prompt: string): Promise<string> {
+  const cleanedPrompt = prompt.trim();
+  if (!cleanedPrompt) {
+    return "Please enter a prompt before asking AI.";
+  }
+
   try {
     const r = await fetch(AI_URL, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ prompt, context: "greenlite", max: 140 }),
+      body: JSON.stringify({ prompt: cleanedPrompt, context: "greenlite", max: 140 }),
     });
     const d = (await r.json()) as { reply?: string; error?: string };
     return cleanReply(d.reply) || `Unavailable (${d.error ?? "?"}).`;

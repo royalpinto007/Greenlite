@@ -13,6 +13,7 @@
     "build:console": "cd web-app && npm install && npm run build",
     "build:web": "rm -rf dist && npm run export:web && npm run build:console && cp -r web/. dist/",
     "deploy": "npm run build:web && wrangler deploy",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@types/react": "^19.2.17",
     "typescript": "^6.0.3",
+    "vitest": "^5.0.0",
     "wrangler": "^4.99.0"
   },
   "overrides": {
